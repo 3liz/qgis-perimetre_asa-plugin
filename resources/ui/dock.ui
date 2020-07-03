@@ -57,7 +57,7 @@
               <item>
                <widget class="QPushButton" name="button_algo_jointure_perimetre">
                 <property name="text">
-                 <string>Jointure Cadastre Perimetre</string>
+                 <string>ASA Jointure Perimetre</string>
                 </property>
                </widget>
               </item>

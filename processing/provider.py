@@ -35,9 +35,6 @@ from ..qgis_plugin_tools.tools.resources import resources_path
 
 class AsaPerimetreProvider(QgsProcessingProvider):
 
-    def icon(self) -> QIcon:
-        return QIcon(resources_path('icons/icon.png'))
-
     def loadAlgorithms(self):
         self.addAlgorithm(JointurePerimetre())
 

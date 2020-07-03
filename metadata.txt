@@ -22,7 +22,7 @@ tags=cadastre, parcelle
 
 homepage=
 category=Analysis
-icon=resources/icons/icon.png
+icon=
 # experimental flag
 experimental=True
 
