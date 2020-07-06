@@ -65,7 +65,7 @@
                <widget class="QWebView" name="documentation">
                 <property name="url">
                  <url>
-                  <string><p>Test du QwebView</p></string>
+                  <string></string>
                  </url>
                 </property>
                </widget>

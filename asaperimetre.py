@@ -54,8 +54,7 @@ class AsaPerimetre:
 
     def unload(self):
         """Unload the plugin."""
-        QgsApplication.processingRegistry().removeProvider(self.provider)
+        if self.provider:
+            QgsApplication.processingRegistry().removeProvider(self.provider)
         iface.removeDockWidget(self.dock)
         self.dock.deleteLater()
-
-
