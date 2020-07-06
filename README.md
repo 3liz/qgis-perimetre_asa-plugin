@@ -1,6 +1,6 @@
 # Plugin ASA Perimètre
 
-Un plugin qui permet de d'effectuer un jointure entre
+Un plugin qui permet d'effectuer un jointure entre
 les données parcellaires et un fichier métier.
 
 Pour utiliser ce plugin il suffit de cliquer sur le bouton
