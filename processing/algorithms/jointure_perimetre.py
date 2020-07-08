@@ -17,11 +17,7 @@ __copyright__ = '(C) 2020 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-import configparser
-import os
 import processing
-
-from db_manager.db_plugins import createDbPlugin
 from qgis.core import (
     QgsProcessing,
     QgsProcessingAlgorithm,
@@ -31,7 +27,6 @@ from qgis.core import (
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterFeatureSink,
     QgsVectorLayerJoinInfo,
-    QgsFeatureSink,
     QgsProcessingMultiStepFeedback,
     QgsVectorLayer
 )
@@ -97,7 +92,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         cadastre = self.parameterAsVectorLayer(parameters, self.LAYER, context)
         role = self.parameterAsVectorLayer(parameters, self.ROLE, context)
-        error = 0
+        count = 0
         feedback = QgsProcessingMultiStepFeedback(1, feedback)
         results = {}
         outputs = {}
@@ -132,6 +127,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             'cod_cultur': 'asa_cod_culture',
             'culture': 'asa_culture'
         }
+        number_item = len(fields_test)
         role.startEditing()
         for field in role.fields():
             f = field.name().lower()
@@ -139,8 +135,8 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             role.renameAttribute(idx, f)
             if f in fields_test.keys():
                 role.renameAttribute(idx, fields_test[f])
-            else:
-                error += 1
+                count += 1
+
 
         alg_params = {
             'DISCARD_NONMATCHING': False,
@@ -153,10 +149,14 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             'PREFIX': '',
             'OUTPUT': parameters[self.FEATURE_SINK]
         }
+        print(count)
+        print(number_item)
+        if count == number_item:
+            outputs['JoinAttributesByFieldValue'] = processing.run('native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True)
+            layer = outputs['JoinAttributesByFieldValue']['OUTPUT']
 
-        outputs['JoinAttributesByFieldValue'] = processing.run('native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True)
-        layer = outputs['JoinAttributesByFieldValue']['OUTPUT']
-
-        #return feature sink
-        results[self.FEATURE_SINK] = layer
+            #return feature sink
+            results[self.FEATURE_SINK] = layer
+        else:
+            results[self.OUTPUT_STRING] = 'Erreur dans le champs de la couche de jointure, il en manques.'
         return results
