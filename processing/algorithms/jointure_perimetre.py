@@ -32,7 +32,8 @@ from qgis.core import (
     QgsProcessingParameterFeatureSink,
     QgsVectorLayerJoinInfo,
     QgsFeatureSink,
-    QgsProcessingMultiStepFeedback
+    QgsProcessingMultiStepFeedback,
+    QgsVectorLayer
 )
 
 from ..asaperimetre_algorithm import AsaPerimetreAlgorithm
@@ -96,16 +97,56 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         cadastre = self.parameterAsVectorLayer(parameters, self.LAYER, context)
         role = self.parameterAsVectorLayer(parameters, self.ROLE, context)
-
+        error = 0
         feedback = QgsProcessingMultiStepFeedback(1, feedback)
         results = {}
         outputs = {}
+        #
+        # feats = [feat for feat in role.getFeatures()]
+        #
+        # copy_layer = QgsVectorLayer('Unknow?crs=2154', "duplicated_layer", "memory")
+        #
+        # copy_layer_data = copy_layer.dataProvider()
+        # attr = role.dataProvider().fields().toList()
+        # copy_layer_data.addAttributes(attr)
+        # copy_layer.updateFields()
+        # copy_layer_data.addFeatures(feats)
+        # print(copy_layer.fields())
+
+        fields_test = {
+            'clef_2': 'asa_id_parcelle',
+            'nom_asp': 'nom_asp',
+            'souscrite': 'asa_droitdeau',
+            'cod_reseau': 'asa_cod_reseau',
+            'reseau': 'asa_reseau',
+            'num_propri': 'asa_num_adherent',
+            'proprio': 'asa_nom',
+            'pro_adr1': 'asa_adresse',
+            'pro_adr2': 'asa_adresse2',
+            'pro_ville': 'asa_commune',
+            'pro_cp': 'asa_cp',
+            'cod_statio': 'asa_cod_station',
+            'station': 'asa_station',
+            'cod_tarif': 'asa_cod_tarif',
+            'tarif': 'asa_tarif',
+            'cod_cultur': 'asa_cod_culture',
+            'culture': 'asa_culture'
+        }
+        role.startEditing()
+        for field in role.fields():
+            f = field.name().lower()
+            idx = role.fields().indexFromName(field.name())
+            role.renameAttribute(idx, f)
+            if f in fields_test.keys():
+                role.renameAttribute(idx, fields_test[f])
+            else:
+                error += 1
 
         alg_params = {
             'DISCARD_NONMATCHING': False,
             'FIELD': 'idu',
             'FIELDS_TO_COPY': None,
-            'FIELD_2': 'clef_2',
+            'FIELD_2': 'asa_id_parcelle',
             'INPUT': cadastre,
             'INPUT_2': role,
             'METHOD': 1,
@@ -114,7 +155,8 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
         }
 
         outputs['JoinAttributesByFieldValue'] = processing.run('native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True)
+        layer = outputs['JoinAttributesByFieldValue']['OUTPUT']
 
         #return feature sink
-        results[self.FEATURE_SINK] = outputs['JoinAttributesByFieldValue']['OUTPUT']
+        results[self.FEATURE_SINK] = layer
         return results
