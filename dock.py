@@ -50,7 +50,7 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
             '<p>Il vous suffira de renseigner votre couche de parcelle puis d\'aller'
             ' choisir votre fichier métier et enfin d\'aller sélectionner'
             ' l\'emplacement de sortie pour la couche qui sera le résultat de la'
-            ',jointure.</p>'
+            ' jointure.</p>'
         )
 
     @staticmethod
