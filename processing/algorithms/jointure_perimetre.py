@@ -92,7 +92,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         cadastre = self.parameterAsVectorLayer(parameters, self.LAYER, context)
         role = self.parameterAsVectorLayer(parameters, self.ROLE, context)
-        count = 0
+        count = 1
         feedback = QgsProcessingMultiStepFeedback(1, feedback)
         results = {}
         outputs = {}
@@ -148,5 +148,5 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             results[self.FEATURE_SINK] = layer
         else:
             results[self.OUTPUT_STRING] = 'Erreur dans le champs de la couche de jointure, il en manques.'
-        role.rollback()
+        role.rollBack()
         return results
