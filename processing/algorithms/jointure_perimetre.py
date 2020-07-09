@@ -138,8 +138,6 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             'PREFIX': '',
             'OUTPUT': parameters[self.FEATURE_SINK]
         }
-        print(count)
-        print(number_item)
         if count == number_item:
             outputs['JoinAttributesByFieldValue'] = processing.run('native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True)
             layer = outputs['JoinAttributesByFieldValue']['OUTPUT']
