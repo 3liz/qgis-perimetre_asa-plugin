@@ -44,13 +44,13 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
         self.documentation.setHtml(
             '<b>Plugin ASA Périmètre</b><br><br>'
             '<p>Un plugin qui permet d\'effectuer un jointure entre'
-            'les données parcellaires et un fichier métier.</p><br>'
+            ' les données parcellaires et un fichier métier.</p><br>'
             '<p>Pour utiliser ce plugin il suffit de cliquer sur le bouton'
-            '"ASA jointure Perimetre" qui lancera l\'algorithme de jointure.</p><br>'
+            ' "ASA jointure Perimetre" qui lancera l\'algorithme de jointure.</p><br>'
             '<p>Il vous suffira de renseigner votre couche de parcelle puis d\'aller'
-            'choisir votre fichier métier et enfin d\'aller sélectionner'
-            'l\'emplacement de sortie pour la couche qui sera le résultat de la'
-            'jointure.</p>'
+            ' choisir votre fichier métier et enfin d\'aller sélectionner'
+            ' l\'emplacement de sortie pour la couche qui sera le résultat de la'
+            ',jointure.</p>'
         )
 
     @staticmethod
