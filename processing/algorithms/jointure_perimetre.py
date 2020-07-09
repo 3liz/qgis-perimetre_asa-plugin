@@ -99,7 +99,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
 
         fields_test = {
             'clef_2': 'asa_id_parcelle',
-            'nom_asp': 'nom_asp',
+            'nom_asa': 'nom_asa',
             'souscrite': 'asa_droitdeau',
             'cod_reseau': 'asa_cod_reseau',
             'reseau': 'asa_reseau',
@@ -125,7 +125,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             if f in fields_test.keys():
                 role.renameAttribute(idx, fields_test[f])
                 count += 1
-
+                del fields_test[f]
 
         alg_params = {
             'DISCARD_NONMATCHING': False,
@@ -145,6 +145,9 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             #return feature sink
             results[self.FEATURE_SINK] = layer
         else:
-            results[self.OUTPUT_STRING] = 'Erreur dans le champs de la couche de jointure, il en manques.'
+            msg = 'Erreur dans les champs de la couche de jointure, il manques:'
+            for k in fields_test.keys():
+                msg += ' ' + k + ','
+            results[self.OUTPUT_STRING] = msg
         role.rollBack()
         return results
