@@ -92,7 +92,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
     def processAlgorithm(self, parameters, context, feedback):
         cadastre = self.parameterAsVectorLayer(parameters, self.LAYER, context)
         role = self.parameterAsVectorLayer(parameters, self.ROLE, context)
-        count = 1
+        count = 0
         feedback = QgsProcessingMultiStepFeedback(1, feedback)
         results = {}
         outputs = {}
