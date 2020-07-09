@@ -41,17 +41,35 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
                 continue
             button.clicked.connect(partial(self.run_algorithm, alg))
 
-        self.documentation.setHtml(
-            '<b>Plugin ASA Périmètre</b><br><br>'
-            '<p>Un plugin qui permet d\'effectuer un jointure entre'
-            ' les données parcellaires et un fichier métier.</p><br>'
-            '<p>Pour utiliser ce plugin il suffit de cliquer sur le bouton'
-            ' "ASA jointure Perimetre" qui lancera l\'algorithme de jointure.</p><br>'
-            '<p>Il vous suffira de renseigner votre couche de parcelle puis d\'aller'
-            ' choisir votre fichier métier et enfin d\'aller sélectionner'
-            ' l\'emplacement de sortie pour la couche qui sera le résultat de la'
-            ' jointure.</p>'
-        )
+        html = '<b><h1> Plugin ASA Perimètre </h1></b>'
+        html += '<p>Un plugin qui permet d\'effectuer une jointure entre'
+        html += 'les données parcellaires et un fichier métier.</p>'
+        html += '<p>Pour utiliser ce plugin il suffit de cliquer sur le bouton'
+        html += '"ASA jointure Perimetre" présent ans l\'image ci-dessous qui'
+        html += 'lancera l\'algorithme de jointure.</p>'
+        html += '<img src="/resources/images/panneauasa.png"/><br><br>'
+        html += '<p>Voici l\'interface de l\’algorithme de jointure, il dispose de'
+        html += 'trois paramètres: le premier concerne la couche des parcelles,'
+        html += 'le deuxième la couche rôle et le dernier le dossier où l\'on'
+        html += 'veut sauvegarder la couche périmètre.</p>'
+        html += '<img src="/resources/images/algoasa.png" /><br><br>'
+        html += '<p>Pour les deux premiers paramètres soit vous avez les couches dans'
+        html += 'un projet QGIS et alors vous pourrez les sélectionner via liste'
+        html += 'déroulante. Soit vous cliquez sur le bouton avec trois points dessous'
+        html += 'et une boîte de sélection de fichiers s\'ouvre comme l\'image ci-dessous'
+        html += 'ou vous irez chercher votre ou vos fichier(s) de données comme le'
+        html += 'fichier concernant la couche rôle.</p>'
+        html += '<img src="/resources/images/getFile.png" /><br><br>'
+        html += '<p>Pour le dernier paramètre il vous faut cliquer sur le bouton'
+        html += 'avec les trois points. Une liste de choix s\'offre vous, il vous'
+        html += 'faut cliquer sur "Enregistrer vers un fichier..." qui vous ouvrira'
+        html += 'une boîte comme l\'image ci-dessous pour sélectionner le dossier'
+        html += 'de sortie et le nom que vous donnerais à la couche ex: périmètre.shp</p>'
+        html += '<img src="resources/images/getFolder.png" /><br><br>'
+        html += '<p>Pour finir il vous restera a cliquer sur le bouton "Exécuter" en bas'
+        html += 'à droite de l\'interface de l\'algorithme présent sur la deuxième image.</p>'
+
+        self.documentation.setHtml( html )
 
     @staticmethod
     def run_algorithm(name):
