@@ -96,17 +96,6 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
         feedback = QgsProcessingMultiStepFeedback(1, feedback)
         results = {}
         outputs = {}
-        #
-        # feats = [feat for feat in role.getFeatures()]
-        #
-        # copy_layer = QgsVectorLayer('Unknow?crs=2154', "duplicated_layer", "memory")
-        #
-        # copy_layer_data = copy_layer.dataProvider()
-        # attr = role.dataProvider().fields().toList()
-        # copy_layer_data.addAttributes(attr)
-        # copy_layer.updateFields()
-        # copy_layer_data.addFeatures(feats)
-        # print(copy_layer.fields())
 
         fields_test = {
             'clef_2': 'asa_id_parcelle',
@@ -159,4 +148,5 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             results[self.FEATURE_SINK] = layer
         else:
             results[self.OUTPUT_STRING] = 'Erreur dans le champs de la couche de jointure, il en manques.'
+        role.rollback()
         return results
