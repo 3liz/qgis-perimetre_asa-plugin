@@ -65,7 +65,7 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
         html += 'faut cliquer sur "Enregistrer vers un fichier..." qui vous ouvrira'
         html += 'une boîte comme l\'image ci-dessous pour sélectionner le dossier'
         html += 'de sortie et le nom que vous donnerais à la couche ex: périmètre.shp</p>'
-        html += '<img src="resources/images/getFolder.png" /><br><br>'
+        html += '<img src="/resources/images/getFolder.png" /><br><br>'
         html += '<p>Pour finir il vous restera a cliquer sur le bouton "Exécuter" en bas'
         html += 'à droite de l\'interface de l\'algorithme présent sur la deuxième image.</p>'
 
