@@ -123,7 +123,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
                 del fields_test[f]
 
         alg_params = {
-            'DISCARD_NONMATCHING': False,
+            'DISCARD_NONMATCHING': True,
             'FIELD': 'idu',
             'FIELDS_TO_COPY': None,
             'FIELD_2': 'asa_id_parcelle',
