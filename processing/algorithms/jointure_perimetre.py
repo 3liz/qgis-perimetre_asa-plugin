@@ -140,9 +140,8 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             #return feature sink
             results[self.FEATURE_SINK] = layer
         else:
-            msg = 'Erreur dans les champs de la couche de jointure, il manques:'
-            for k in fields_test.keys():
-                msg += ' ' + k + ','
+            msg = 'Erreur dans les champs de la couche de jointure, il manque : '
+            msg += ', '.join(fields_test.keys())
             results[self.OUTPUT_STRING] = msg
         role.rollBack()
         return results
