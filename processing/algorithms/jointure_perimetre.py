@@ -59,7 +59,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
 
         self.addParameter(
             QgsProcessingParameterFeatureSource(
-                self.LAYER, 'Couche cadastre',
+                self.LAYER, 'Couche parcelle',
                 [QgsProcessing.TypeVector],
                 optional=False
             )
