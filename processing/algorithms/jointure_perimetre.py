@@ -20,15 +20,10 @@ __revision__ = '$Format:%H$'
 import processing
 from qgis.core import (
     QgsProcessing,
-    QgsProcessingAlgorithm,
-    QgsProcessingParameterCrs,
     QgsProcessingOutputString,
-    QgsExpressionContextUtils,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterFeatureSink,
-    QgsVectorLayerJoinInfo,
-    QgsProcessingMultiStepFeedback,
-    QgsVectorLayer
+    QgsProcessingMultiStepFeedback
 )
 
 from ..asaperimetre_algorithm import AsaPerimetreAlgorithm

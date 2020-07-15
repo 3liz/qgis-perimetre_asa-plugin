@@ -26,10 +26,9 @@ __copyright__ = '(C) 2018 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from qgis.core import QgsApplication, QgsMessageLog, Qgis
+from qgis.core import QgsApplication
 from qgis.utils import iface
 from qgis.PyQt.QtCore import Qt
-from qgis.PyQt.QtWidgets import QMessageBox
 
 from .dock import AsaPerimetreDock
 from .processing.provider import AsaPerimetreProvider

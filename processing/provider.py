@@ -26,11 +26,9 @@ __copyright__ = '(C) 2020 by 3liz'
 
 __revision__ = '$Format:%H$'
 
-from qgis.PyQt.QtGui import QIcon
 from qgis.core import QgsProcessingProvider
 
 from .algorithms.jointure_perimetre import JointurePerimetre
-from ..qgis_plugin_tools.tools.resources import resources_path
 
 
 class AsaPerimetreProvider(QgsProcessingProvider):
