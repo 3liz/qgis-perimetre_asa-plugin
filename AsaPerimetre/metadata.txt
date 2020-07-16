@@ -2,7 +2,7 @@
 name=AsaPerimetre
 qgisMinimumVersion=3.0
 description=Plugin to join data
-version=0.1.0
+version=1.0.0
 author=3liz
 email=info@3liz.com
 
