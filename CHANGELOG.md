@@ -1,6 +1,6 @@
 ## CHANGELOG
 
-### 1.0.2 - 19/08/2020
+### 1.0.3 - 19/08/2020
 
 * Add pictures in the dock
 

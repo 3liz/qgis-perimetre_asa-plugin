@@ -101,6 +101,6 @@ deploy:
 
     # For easy download of the plugin zip
     - cp ${PLUGIN_NAME_ZIP}.${CI_COMMIT_REF_NAME}.zip ${PLUGIN_NAME_ZIP}.latest.zip
-    - upload_to_packages_server ${PLUGIN_NAME}.latest.zip private/${CUSTOMER}/
+    - upload_to_packages_server ${PLUGIN_NAME_ZIP}.latest.zip private/${CUSTOMER}/
   tags:
     - fabric
