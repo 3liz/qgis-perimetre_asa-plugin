@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ASA Perimetre</string>
+   <string>ASA Périmètre</string>
   </property>
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -57,7 +57,7 @@
               <item>
                <widget class="QPushButton" name="button_algo_jointure_perimetre">
                 <property name="text">
-                 <string>ASA Jointure Perimetre</string>
+                 <string>ASA Jointure Périmètre</string>
                 </property>
                </widget>
               </item>
