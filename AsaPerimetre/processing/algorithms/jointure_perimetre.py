@@ -29,7 +29,6 @@ from qgis.core import (
 from ..asaperimetre_algorithm import AsaPerimetreAlgorithm
 
 
-
 class JointurePerimetre(AsaPerimetreAlgorithm):
 
     LAYER = 'LAYER'
@@ -134,10 +133,12 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             'OUTPUT': parameters[self.FEATURE_SINK]
         }
         if count == number_item:
-            outputs['JoinAttributesByFieldValue'] = processing.run('native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True)
+            outputs['JoinAttributesByFieldValue'] = processing.run(
+                'native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True
+            )
             layer = outputs['JoinAttributesByFieldValue']['OUTPUT']
 
-            #return feature sink
+            # return feature sink
             results[self.FEATURE_SINK] = layer
         else:
             msg = 'Erreur dans les champs de la couche de jointure, il manque : '
