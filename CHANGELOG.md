@@ -1,4 +1,7 @@
 ## CHANGELOG
 
-### 1.0.0 - 19/08/2020
-* AsaPerimetre Plugin
+### 1.0.0 - 16/07/2020
+
+* First release of the plugin
+
+###

@@ -22,15 +22,15 @@ qgis-3.4:
     - >
       docker run
       -d --name ${CI_JOB_ID}
-      -v ${CI_PROJECT_DIR}/AsaPerimetre:/AsaPerimetre
+      -v ${CI_PROJECT_DIR}/${PLUGIN_NAME}:/${PLUGIN_NAME}
       -e GITLAB=yes -e DISPLAY=:99
       qgis/qgis:release-3_4
     - sleep 10
-    - docker exec -t ${CI_JOB_ID} sh -c "qgis_setup.sh AsaPerimetre"
+    - docker exec -t ${CI_JOB_ID} sh -c "qgis_setup.sh ${PLUGIN_NAME}"
   script:
     - >
       docker exec -t ${CI_JOB_ID}
-      sh -c "qgis_testrunner.sh AsaPerimetre.qgis_plugin_tools.infrastructure.test_runner.test_package"
+      sh -c "qgis_testrunner.sh ${PLUGIN_NAME}.qgis_plugin_tools.infrastructure.test_runner.test_package"
   after_script:
     - docker rm -f ${CI_JOB_ID}
   tags:
@@ -51,7 +51,7 @@ package:
       package ${CI_COMMIT_REF_NAME}
       --allow-uncommitted-changes
       --disable-submodule-update
-      --plugin-repo-url https://packages.3liz.org/private/asa-info/
+      --plugin-repo-url https://packages.3liz.org/private/${CUSTOMER}/
   tags:
     - factory
   artifacts:
