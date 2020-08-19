@@ -1,0 +1,105 @@
+variables:
+  CUSTOMER: "asa-info"
+  PLUGIN_NAME: "AsaPerimetre"
+  PROJECT_ID: "334"
+  GIT_SUBMODULE_STRATEGY: recursive
+
+stages:
+- tests 🎳
+- package 📦
+- release 🚀
+
+flake8:
+  stage: tests 🎳
+  script:
+    - make flake8
+  tags:
+    - factory
+
+qgis-3.4:
+  stage: tests 🎳
+  before_script:
+    - >
+      docker run
+      -d --name ${CI_JOB_ID}
+      -v ${CI_PROJECT_DIR}/AsaPerimetre:/AsaPerimetre
+      -e GITLAB=yes -e DISPLAY=:99
+      qgis/qgis:release-3_4
+    - sleep 10
+    - docker exec -t ${CI_JOB_ID} sh -c "qgis_setup.sh AsaPerimetre"
+  script:
+    - >
+      docker exec -t ${CI_JOB_ID}
+      sh -c "qgis_testrunner.sh AsaPerimetre.qgis_plugin_tools.infrastructure.test_runner.test_package"
+  after_script:
+    - docker rm -f ${CI_JOB_ID}
+  tags:
+    - factory
+
+package:
+  stage: package 📦
+  only:
+    - schedules
+    - tags
+  script:
+    - >
+      docker run
+      --rm -w /plugin
+      -v ${CI_PROJECT_DIR}:/plugin
+      -u $(id -u):$(id -g)
+      etrimaille/qgis-plugin-ci:1.8.2
+      package ${CI_COMMIT_REF_NAME}
+      --allow-uncommitted-changes
+      --disable-submodule-update
+      --plugin-repo-url https://packages.3liz.org/private/asa-info/
+  tags:
+    - factory
+  artifacts:
+    expose_as: 'QGIS package'
+    paths:
+      - ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip
+      - plugins.xml
+
+release:
+  stage: release 🚀
+  only:
+    - tags
+  script:
+    - >
+      curl
+      --header 'Content-Type:application/json'
+      --header "PRIVATE-TOKEN:${USER_TOKEN}"
+      --data '{
+      "name":"'"${CI_COMMIT_REF_NAME}"'",
+      "ref":"'"${CI_COMMIT_REF_NAME}"'",
+      "tag_name":"'"${CI_COMMIT_REF_NAME}"'",
+      "assets":{
+      "links":[{
+      "name":"QGIS Package",
+      "url":"'"${CI_JOB_URL}"'/artifacts/file/'"${PLUGIN_NAME}"'.'"${CI_COMMIT_REF_NAME}"'.zip"
+      }] } }'
+      --request POST https://projects.3liz.org/api/v4/projects/${PROJECT_ID}/releases
+  tags:
+    - factory
+  artifacts:
+    # Need to redefine the artifact to keep it 2 weeks at least
+    expire_in: 3 months
+    expose_as: 'QGIS package'
+    paths:
+      - ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip
+      - plugins.xml
+
+deploy:
+  stage: release 🚀
+  only:
+    - tags
+  script:
+    # For plugins.xml
+    - upload_to_packages_server ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip private/${CUSTOMER}/
+    - upload_to_packages_server plugins.xml private/${CUSTOMER}/
+
+    # For easy download of the plugin zip
+    - cp ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip ${PLUGIN_NAME}.latest.zip
+    - upload_to_packages_server ${PLUGIN_NAME}.latest.zip private/${CUSTOMER}/
+  tags:
+    - fabric
