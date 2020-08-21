@@ -1,6 +1,7 @@
 variables:
   CUSTOMER: "asa-info"
   PLUGIN_NAME: "AsaPerimetre"
+  PLUGIN_NAME_ZIP: "asaperimetre"
   PROJECT_ID: "334"
   GIT_SUBMODULE_STRATEGY: recursive
 
@@ -57,7 +58,7 @@ package:
   artifacts:
     expose_as: 'QGIS package'
     paths:
-      - ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip
+      - ${PLUGIN_NAME_ZIP}.${CI_COMMIT_REF_NAME}.zip
       - plugins.xml
 
 release:
@@ -76,7 +77,7 @@ release:
       "assets":{
       "links":[{
       "name":"QGIS Package",
-      "url":"'"${CI_JOB_URL}"'/artifacts/file/'"${PLUGIN_NAME}"'.'"${CI_COMMIT_REF_NAME}"'.zip"
+      "url":"'"${CI_JOB_URL}"'/artifacts/file/'"${PLUGIN_NAME_ZIP}"'.'"${CI_COMMIT_REF_NAME}"'.zip"
       }] } }'
       --request POST https://projects.3liz.org/api/v4/projects/${PROJECT_ID}/releases
   tags:
@@ -86,7 +87,7 @@ release:
     expire_in: 3 months
     expose_as: 'QGIS package'
     paths:
-      - ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip
+      - ${PLUGIN_NAME_ZIP}.${CI_COMMIT_REF_NAME}.zip
       - plugins.xml
 
 deploy:
@@ -94,12 +95,12 @@ deploy:
   only:
     - tags
   script:
-    # For plugins.xml
-    - upload_to_packages_server ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip private/${CUSTOMER}/
+    # For plugins.xml with the versioned zip
+    - upload_to_packages_server ${PLUGIN_NAME_ZIP}.${CI_COMMIT_REF_NAME}.zip private/${CUSTOMER}/
     - upload_to_packages_server plugins.xml private/${CUSTOMER}/
 
     # For easy download of the plugin zip
-    - cp ${PLUGIN_NAME}.${CI_COMMIT_REF_NAME}.zip ${PLUGIN_NAME}.latest.zip
-    - upload_to_packages_server ${PLUGIN_NAME}.latest.zip private/${CUSTOMER}/
+    - cp ${PLUGIN_NAME_ZIP}.${CI_COMMIT_REF_NAME}.zip ${PLUGIN_NAME_ZIP}.latest.zip
+    - upload_to_packages_server ${PLUGIN_NAME_ZIP}.latest.zip private/${CUSTOMER}/
   tags:
     - fabric
