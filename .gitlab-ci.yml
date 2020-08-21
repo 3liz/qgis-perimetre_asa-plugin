@@ -4,6 +4,7 @@ variables:
   PLUGIN_NAME_ZIP: "asaperimetre"
   PROJECT_ID: "334"
   GIT_SUBMODULE_STRATEGY: recursive
+  GIT_STRATEGY: clone
 
 stages:
 - tests 🎳
