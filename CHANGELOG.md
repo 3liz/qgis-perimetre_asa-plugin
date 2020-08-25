@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 1.0.5 - 25/08/2020
+
+* Fix pictures in the dock on Windows
+* Add some CSS in the dock
+
 ### 1.0.3 - 19/08/2020
 
 * Add pictures in the dock
