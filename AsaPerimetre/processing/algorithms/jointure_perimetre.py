@@ -112,6 +112,7 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
         }
         number_item = len(fields_test)
         role.startEditing()
+        cadastre.startEditing()
         for field in role.fields():
             f = field.name().lower()
             idx = role.fields().indexFromName(field.name())
@@ -120,6 +121,12 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
                 role.renameAttribute(idx, fields_test[f])
                 count += 1
                 del fields_test[f]
+
+        for field in cadastre.fields():
+            f = field.name().lower()
+            f = 'cad_' + f
+            idx = role.fields().indexFromName(field.name())
+            role.renameAttribute(idx, f)
 
         alg_params = {
             'DISCARD_NONMATCHING': True,
@@ -144,5 +151,6 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             msg = 'Erreur dans les champs de la couche de jointure, il manque : '
             msg += ', '.join(fields_test.keys())
             results[self.OUTPUT_STRING] = msg
+        cadastre.rollBack()
         role.rollBack()
         return results
