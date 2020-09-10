@@ -17,4 +17,4 @@ class AsaPerimetreAlgorithm(QgsProcessingAlgorithm):
         return type(self)()
 
     def flags(self):
-        return super().flags() | QgsProcessingAlgorithm.FlagHideFromModeler
+        return super().flags()
