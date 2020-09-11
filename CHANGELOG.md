@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 1.0.6 - 11/09/2020
+
+* Adding rename fields of parcelle layer
+
 ### 1.0.5 - 25/08/2020
 
 * Fix pictures in the dock on Windows
