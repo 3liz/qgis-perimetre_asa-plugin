@@ -1,5 +1,10 @@
 ## CHANGELOG
 
+### 1.0.7 - 18/09/2020
+
+* overhaul of the renaming system
+* Adding units tests
+
 ### 1.0.6 - 11/09/2020
 
 * Adding rename fields of parcelle layer
