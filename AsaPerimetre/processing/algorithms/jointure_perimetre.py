@@ -23,8 +23,10 @@ from qgis.core import (
     QgsProcessingOutputString,
     QgsProcessingParameterFeatureSource,
     QgsProcessingParameterFeatureSink,
-    QgsProcessingMultiStepFeedback
+    QgsProcessingMultiStepFeedback,
+    QgsProcessingUtils,
 )
+import copy
 
 from ..asaperimetre_algorithm import AsaPerimetreAlgorithm
 
@@ -110,47 +112,108 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
             'cod_cultur': 'asa_cod_culture',
             'culture': 'asa_culture'
         }
+
+        fields_needed = copy.deepcopy(fields_test)
+
         number_item = len(fields_test)
-        role.startEditing()
-        cadastre.startEditing()
+
         for field in role.fields():
             f = field.name().lower()
-            idx = role.fields().indexFromName(field.name())
-            role.renameAttribute(idx, f)
             if f in fields_test.keys():
-                role.renameAttribute(idx, fields_test[f])
                 count += 1
-                del fields_test[f]
+                del fields_needed[f]
 
-        for field in cadastre.fields():
-            f = field.name().lower()
-            f = 'cad_' + f
-            idx = role.fields().indexFromName(field.name())
-            role.renameAttribute(idx, f)
+        if count < number_item:
+
+            msg = 'Erreur dans les champs de la couche de jointure, il manque : '
+            msg += ', '.join(fields_needed.keys())
+            results[self.OUTPUT_STRING] = msg
+            return results
 
         alg_params = {
             'DISCARD_NONMATCHING': True,
             'FIELD': 'idu',
             'FIELDS_TO_COPY': None,
-            'FIELD_2': 'asa_id_parcelle',
+            'FIELD_2': 'CLEF_2',
             'INPUT': cadastre,
             'INPUT_2': role,
             'METHOD': 1,
-            'PREFIX': '',
+            'PREFIX': 'asa_tmp_',
+            'OUTPUT': 'memory:'
+        }
+
+        outputs['JoinAttributesByFieldValue'] = processing.run(
+            'native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True
+        )
+        layerPath = outputs['JoinAttributesByFieldValue']['OUTPUT']
+
+        layer = QgsProcessingUtils.mapLayerFromString(layerPath, context=context)
+
+        feedback.pushInfo('### RENOMMAGE DES CHAMPS ###')
+
+        refactor_fields = {
+            'FIELDS_MAPPING': [],
+            'INPUT': layer,
             'OUTPUT': parameters[self.FEATURE_SINK]
         }
-        if count == number_item:
-            outputs['JoinAttributesByFieldValue'] = processing.run(
-                'native:joinattributestable', alg_params, context=context, feedback=feedback, is_child_algorithm=True
-            )
-            layer = outputs['JoinAttributesByFieldValue']['OUTPUT']
 
-            # return feature sink
-            results[self.FEATURE_SINK] = layer
-        else:
-            msg = 'Erreur dans les champs de la couche de jointure, il manque : '
-            msg += ', '.join(fields_test.keys())
-            results[self.OUTPUT_STRING] = msg
-        cadastre.rollBack()
-        role.rollBack()
+        asa_fields_needed = []
+        cad_field_mapping = []
+        asa_fields_mapping = []
+
+        for field in layer.fields():
+            newName = ''
+            f = field.name().lower()
+            if f.startswith('asa_tmp_'):
+                f = f.replace('asa_tmp_', '')
+                if f in fields_test.keys():
+                    newName = fields_test[f]
+                    asa_fields_needed.append({
+                        'expression': '"'+f+'"',
+                        'length': field.length(),
+                        'name': newName,
+                        'precision': field.precision(),
+                        'type': field.type()
+                    })
+                elif f == 'commune':
+                    newName = 'asa_commune_2'
+                    asa_fields_mapping.append({
+                        'expression': '"'+f+'"',
+                        'length': field.length(),
+                        'name': newName,
+                        'precision': field.precision(),
+                        'type': field.type()
+                    })
+                else:
+                    newName = 'asa_'+f
+                    asa_fields_mapping.append({
+                        'expression': '"'+f+'"',
+                        'length': field.length(),
+                        'name': newName,
+                        'precision': field.precision(),
+                        'type': field.type()
+                    })
+            else:
+                newName = 'cad_'+f
+                cad_field_mapping.append({
+                    'expression': '"'+f+'"',
+                    'length': field.length(),
+                    'name': newName,
+                    'precision': field.precision(),
+                    'type': field.type()
+                })
+
+        refactor_fields['FIELDS_MAPPING'].extend(cad_field_mapping)
+        refactor_fields['FIELDS_MAPPING'].extend(asa_fields_needed)
+        refactor_fields['FIELDS_MAPPING'].extend(asa_fields_mapping)
+
+        outputs['refactorFields'] = processing.run(
+            'qgis:refactorfields', refactor_fields, context=context, feedback=feedback, is_child_algorithm=True
+        )
+        layerPath = outputs['refactorFields']['OUTPUT']
+
+        # return feature sink
+        results[self.FEATURE_SINK] = layerPath
+        results[self.OUTPUT_STRING] = "Success"
+
         return results
