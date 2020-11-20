@@ -162,43 +162,43 @@ class JointurePerimetre(AsaPerimetreAlgorithm):
         asa_fields_mapping = []
 
         for field in layer.fields():
-            newName = ''
-            f = field.name().lower()
-            if f.startswith('asa_tmp_'):
-                f = f.replace('asa_tmp_', '')
-                if f in fields_test.keys():
-                    newName = fields_test[f]
+            new_name = ''
+            start_field = field.name().lower()
+            if start_field.startswith('asa_tmp_'):
+                new_field = start_field.replace('asa_tmp_', '')
+                if new_field in fields_test.keys():
+                    new_name = fields_test[new_field]
                     asa_fields_needed.append({
-                        'expression': '"'+f+'"',
+                        'expression': '"'+start_field+'"',
                         'length': field.length(),
-                        'name': newName,
+                        'name': new_name,
                         'precision': field.precision(),
                         'type': field.type()
                     })
-                elif f == 'commune':
-                    newName = 'asa_commune_2'
+                elif new_field == 'commune':
+                    new_name = 'asa_commune_2'
                     asa_fields_mapping.append({
-                        'expression': '"'+f+'"',
+                        'expression': '"'+start_field+'"',
                         'length': field.length(),
-                        'name': newName,
+                        'name': new_name,
                         'precision': field.precision(),
                         'type': field.type()
                     })
                 else:
-                    newName = 'asa_'+f
+                    new_name = 'asa_'+new_field
                     asa_fields_mapping.append({
-                        'expression': '"'+f+'"',
+                        'expression': '"'+start_field+'"',
                         'length': field.length(),
-                        'name': newName,
+                        'name': new_name,
                         'precision': field.precision(),
                         'type': field.type()
                     })
             else:
-                newName = 'cad_'+f
+                new_name = 'cad_'+start_field
                 cad_field_mapping.append({
-                    'expression': '"'+f+'"',
+                    'expression': '"'+start_field+'"',
                     'length': field.length(),
-                    'name': newName,
+                    'name': new_name,
                     'precision': field.precision(),
                     'type': field.type()
                 })
