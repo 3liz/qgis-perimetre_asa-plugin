@@ -1,5 +1,9 @@
 ## CHANGELOG
 
+### 1.0.8 - 20/11/2020
+
+* bugfix regression
+
 ### 1.0.7 - 18/09/2020
 
 * overhaul of the renaming system
