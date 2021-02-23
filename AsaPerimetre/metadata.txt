@@ -4,15 +4,15 @@ qgisMinimumVersion=3.0
 description=Plugin to join data
 version=master
 changelog=changelog
-author=3liz
+author=3Liz
 email=info@3liz.com
 
 
-tracker=https://projects.3liz.org/
-repository=https://projects.3liz.org/
+tracker=https://github.com/3liz/qgis-perimetre_asa-plugin
+repository=https://github.com/3liz/qgis-perimetre_asa-plugin
 tags=Asa, cadastre, perimetre
 
-homepage=https://projects.3liz.org/
+homepage=https://github.com/3liz/qgis-perimetre_asa-plugin
 category=Analysis
 icon=
 experimental=False
