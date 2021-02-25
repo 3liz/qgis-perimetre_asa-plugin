@@ -1,6 +1,6 @@
 variables:
   CUSTOMER: "asa-info"
-  PLUGIN_NAME: "AsaPerimetre"
+  PLUGIN_NAME: "perimetre_asa"
   PROJECT_ID: "334"
   GIT_SUBMODULE_STRATEGY: recursive
   GIT_STRATEGY: clone
