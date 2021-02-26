@@ -29,6 +29,7 @@ __revision__ = '$Format:%H$'
 from qgis.core import QgsApplication
 from qgis.utils import iface
 from qgis.PyQt.QtCore import Qt
+from qgis.PyQt.QtWidgets import QMenu
 
 from .dock import AsaPerimetreDock
 from .processing.provider import AsaPerimetreProvider
@@ -38,6 +39,7 @@ class AsaPerimetre:
 
     def __init__(self):
         self.provider = None
+        self.menu = None
         self.dock = None
 
     def initProcessing(self):
@@ -49,7 +51,18 @@ class AsaPerimetre:
         """Init the user interface."""
         self.initProcessing()
         self.dock = AsaPerimetreDock()
+
         iface.addDockWidget(Qt.RightDockWidgetArea, self.dock)
+
+        action = self.dock.toggleViewAction()
+
+        self.menu = QMenu("&Périmètre d'ASA")
+
+        # Add Perimetre ASA to Extension menu
+        self.menu.addAction(action)
+
+        plugin_menu = iface.pluginMenu()
+        plugin_menu.addMenu(self.menu)
 
     def unload(self):
         """Unload the plugin."""
