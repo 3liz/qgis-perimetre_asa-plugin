@@ -71,4 +71,6 @@ class AsaPerimetre:
         if self.provider:
             QgsApplication.processingRegistry().removeProvider(self.provider)
         iface.removeDockWidget(self.dock)
+        iface.removePluginMenu(self.menu)
+        iface.removeToolbarIcon(self.toolbar)
         self.dock.deleteLater()
