@@ -63,6 +63,8 @@ class AsaPerimetre:
 
         plugin_menu = iface.pluginMenu()
         plugin_menu.addMenu(self.menu)
+        # Add Perimetre ASA toolbar
+        iface.addToolBarIcon(action)
 
     def unload(self):
         """Unload the plugin."""
