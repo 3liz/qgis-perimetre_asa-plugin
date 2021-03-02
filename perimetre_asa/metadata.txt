@@ -14,6 +14,6 @@ tags=Asa, cadastre, perimetre
 
 homepage=https://github.com/3liz/qgis-perimetre_asa-plugin
 category=Analysis
-icon=
+icon=resources/icons/icon.png
 experimental=False
 deprecated=False

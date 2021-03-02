@@ -42,11 +42,11 @@ class AsaPerimetre:
         # Add Perimetre ASA toolbar
         iface.addToolBarIcon(action)
 
-    def unload(self):
-        """Unload the plugin."""
-        if self.provider:
-            QgsApplication.processingRegistry().removeProvider(self.provider)
-        iface.removeDockWidget(self.dock)
-        iface.removePluginMenu(self.menu)
-        iface.removeToolbarIcon(self.toolbar)
-        self.dock.deleteLater()
+    # def unload(self):
+    #     """Unload the plugin."""
+    #     if self.provider:
+    #         QgsApplication.processingRegistry().removeProvider(self.provider)
+    #     iface.removeDockWidget(self.dock)
+    #     iface.removePluginMenu(self.menu)
+    #     iface.removeToolbarIcon(self.toolbar)
+    #     self.dock.deleteLater()
