@@ -42,7 +42,7 @@ class TestProcessing(BaseTestProcessing):
         context.setFeedback(feedback)
 
         # Run algorithm
-        data = processing.run('asaperimetre:jointure_perimetre', params, context=context, feedback=feedback)
+        data = processing.run('perimetre_asa:jointure_perimetre', params, context=context, feedback=feedback)
 
         # Testing outputs
         self.assertIn('FEATURE_SINK', data)
@@ -53,15 +53,15 @@ class TestProcessing(BaseTestProcessing):
         layer = data['FEATURE_SINK']
         if not isinstance(layer, QgsVectorLayer):
             layer = QgsProcessingUtils.mapLayerFromString(data['FEATURE_SINK'], context=context)
-        refLayer = QgsProcessingUtils.mapLayerFromString(
+        ref_layer = QgsProcessingUtils.mapLayerFromString(
             plugin_test_data_path('perimetre.gpkg|layername=perimetre'),
             context=context
         )
 
         not_found_fields = []
-        for f in refLayer.fields():
-            fname = f.name()
-            if layer.fields().indexFromName(fname) < 0:
-                not_found_fields.append(fname)
+        for f in ref_layer.fields():
+            f_name = f.name()
+            if layer.fields().indexFromName(f_name) < 0:
+                not_found_fields.append(f_name)
 
         self.assertListEqual(not_found_fields, ['fid'])

@@ -15,7 +15,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
 
-class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
+class PerimetreAsaDock(QDockWidget, DOCK_CLASS):
 
     def __init__(self, parent=None):
         _ = parent
@@ -41,8 +41,8 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
         html += 'h2 {color: #fff; background-color: #014571; line-height: 2; padding-left:5px; }'
         html += 'p {margin-left: 10px; }'
         html += '</style></head><body>'
-        html += '<b><h2> Plugin ASA Périmètre </h2></b>'
-        html += '<p>Un plugin qui permet d\'effectuer une jointure entre '
+        html += '<b><h2>Extension Périmètre d\'ASA</h2></b>'
+        html += '<p>Une extension qui permet d\'effectuer une jointure entre '
         html += 'les données parcellaires et un fichier métier.</p>'
         html += '<p>Pour utiliser cette extension il faut cliquer sur le bouton '
         html += '"ASA jointure Périmètre" présent dans l\'image ci-dessous qui '
@@ -76,5 +76,5 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
 
     @staticmethod
     def run_algorithm(name):
-        alg_name = 'asaperimetre:{}'.format(name)
+        alg_name = 'perimetre_asa:{}'.format(name)
         execAlgorithmDialog(alg_name, {})

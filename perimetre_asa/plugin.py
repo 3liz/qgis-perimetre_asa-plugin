@@ -8,12 +8,12 @@ from qgis.PyQt.QtCore import Qt
 from qgis.PyQt.QtGui import QIcon
 from qgis.PyQt.QtWidgets import QAction
 
-from .dock import AsaPerimetreDock
-from .processing.provider import AsaPerimetreProvider
+from .dock import PerimetreAsaDock
+from .processing.provider import PerimetreAsaProvider
 from .qgis_plugin_tools.tools.resources import resources_path
 
 
-class AsaPerimetre:
+class PerimetreAsa:
 
     def __init__(self):
         self.provider = None
@@ -23,13 +23,13 @@ class AsaPerimetre:
 
     def initProcessing(self):
         """ Init Processing provider for QGIS >= 3.8. """
-        self.provider = AsaPerimetreProvider()
+        self.provider = PerimetreAsaProvider()
         QgsApplication.processingRegistry().addProvider(self.provider)
 
     def initGui(self):
         """ Init the user interface. """
         self.initProcessing()
-        self.dock = AsaPerimetreDock()
+        self.dock = PerimetreAsaDock()
 
         iface.addDockWidget(Qt.RightDockWidgetArea, self.dock)
 

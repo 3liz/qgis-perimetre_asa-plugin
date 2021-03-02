@@ -13,10 +13,10 @@ from qgis.core import (
 )
 import copy
 
-from ..asaperimetre_algorithm import AsaPerimetreAlgorithm
+from ..perimetre_asa_algorithm import PerimetreAsaAlgorithm
 
 
-class JointurePerimetre(AsaPerimetreAlgorithm):
+class JointurePerimetre(PerimetreAsaAlgorithm):
 
     LAYER = 'LAYER'
     ROLE = 'ROLE'

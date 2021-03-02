@@ -8,7 +8,7 @@ from qgis.PyQt.QtCore import (
 from qgis.testing import unittest
 from processing.core.Processing import Processing
 
-from ..processing.provider import AsaPerimetreProvider as Provider
+from ..processing.provider import PerimetreAsaProvider as Provider
 
 __copyright__ = "Copyright 2021, 3Liz"
 __license__ = "GPL version 3"

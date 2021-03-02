@@ -9,10 +9,7 @@ __license__ = "GPL version 3"
 __email__ = "info@3liz.org"
 
 
-class AsaPerimetreAlgorithm(QgsProcessingAlgorithm):
-
-    def __init__(self):
-        super().__init__()
+class PerimetreAsaAlgorithm(QgsProcessingAlgorithm):
 
     def createInstance(self):
         return type(self)()

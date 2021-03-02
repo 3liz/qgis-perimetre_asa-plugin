@@ -5,10 +5,5 @@ __email__ = "info@3liz.org"
 
 # noinspection PyPep8Naming
 def classFactory(iface):  # pylint: disable=invalid-name
-    """Load Raepa class from file Raepa.
-
-    :param iface: A QGIS interface instance.
-    :type iface: QgsInterface
-    """
-    from .asaperimetre import AsaPerimetre
-    return AsaPerimetre()
+    from .plugin import PerimetreAsa
+    return PerimetreAsa()
