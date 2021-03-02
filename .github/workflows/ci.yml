@@ -89,4 +89,6 @@ jobs:
         qgis-plugin-ci
         release ${GITHUB_REF/refs\/tags\//}
         --github-token ${{ secrets.BOT_HUB_TOKEN }}
+        --osgeo-username ${{ secrets.OSGEO_USERNAME }}
+        --osgeo-password ${{ secrets.OSGEO_PASSWORD }}
         --create-plugin-repo
