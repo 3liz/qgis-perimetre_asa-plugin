@@ -22,7 +22,6 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
         super().__init__()
 
         self.setupUi(self)
-        self.tab_widget.setCurrentIndex(0)
 
         self.algorithms = [
             'jointure_perimetre',
@@ -38,8 +37,9 @@ class AsaPerimetreDock(QDockWidget, DOCK_CLASS):
         html += '\'Ubuntu\', \'Lucida Grande\', \'Segoe UI\', \'Arial\', sans-serif;'
         html += 'margin-left: 0px; margin-right: 0px; margin-top: 0px;'
         html += 'font-size: 14px;}'
-        html += 'img {max-width: 100%;}'
+        html += 'img {max-width: 100%; margin: 20px;}'
         html += 'h2 {color: #fff; background-color: #014571; line-height: 2; padding-left:5px; }'
+        html += 'p {margin-left: 10px; }'
         html += '</style></head><body>'
         html += '<b><h2> Plugin ASA Périmètre </h2></b>'
         html += '<p>Un plugin qui permet d\'effectuer une jointure entre '

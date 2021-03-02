@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>545</width>
-    <height>519</height>
+    <width>705</width>
+    <height>674</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,82 +15,20 @@
   </property>
   <widget class="QWidget" name="dockWidgetContents">
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
     <item>
-     <widget class="QTabWidget" name="tab_widget">
-      <property name="currentIndex">
-       <number>0</number>
+     <widget class="QPushButton" name="button_algo_jointure_perimetre">
+      <property name="text">
+       <string>ASA Jointure Périmètre</string>
       </property>
-      <widget class="QWidget" name="tab_import">
-       <attribute name="title">
-        <string>Jointure</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QScrollArea" name="scrollArea_3">
-          <property name="widgetResizable">
-           <bool>true</bool>
-          </property>
-          <widget class="QWidget" name="scrollAreaWidgetContents_3">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>521</width>
-             <height>449</height>
-            </rect>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_10">
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_9">
-              <item>
-               <widget class="QPushButton" name="button_algo_jointure_perimetre">
-                <property name="text">
-                 <string>ASA Jointure Périmètre</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QWebView" name="documentation">
-                <property name="url">
-                 <url>
-                  <string></string>
-                 </url>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="verticalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Vertical</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>20</width>
-                  <height>40</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </item>
-       </layout>
-      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWebView" name="documentation">
+      <property name="url">
+       <url>
+        <string>about:blank</string>
+       </url>
+      </property>
      </widget>
     </item>
    </layout>
