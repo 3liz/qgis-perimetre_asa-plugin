@@ -1,18 +1,19 @@
 [general]
-name=Périmètre d'Asa
+name=Périmètre d'ASA
 qgisMinimumVersion=3.0
-description=Plugin to join data
+description=French use case only. Extension pour la jointure des données parcellaires et un fichier métier pour http://asainfo.fr/
+about=French use case only. Effectuer une jointure entre les données parcellaires et un fichier métier pour http://asainfo.fr/
 version=master
 changelog=changelog
 author=3Liz
 email=info@3liz.com
 
-
+homepage=https://github.com/3liz/qgis-perimetre_asa-plugin
 tracker=https://github.com/3liz/qgis-perimetre_asa-plugin
 repository=https://github.com/3liz/qgis-perimetre_asa-plugin
+
 tags=Asa, cadastre, perimetre
 
-homepage=https://github.com/3liz/qgis-perimetre_asa-plugin
 category=Analysis
 icon=resources/icons/icon.png
 experimental=False

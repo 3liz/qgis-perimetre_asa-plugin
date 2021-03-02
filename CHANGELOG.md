@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 2.0.0 - 2021-03-02
+
+* First official version
+* Add an icon for the plugin
+* Add a button in the toolbar and the plugin menu
+* Rename the plugin to Périmètre d'ASA
+* Review the dock to remove extra widgets and CSS
+
 ## 1.0.8 - 2020-11-20
 
 * Bugfix regression

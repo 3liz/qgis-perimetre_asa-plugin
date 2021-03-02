@@ -1,6 +1,13 @@
+# Python
 __pycache__/
 *.pyc
+
+# OS
 .DS_Store
+
+# IDE
 .idea/
-AsaPerimetre.*.zip
+
+# QGIS-Plugin-CI
+perimetre_asa.*.zip
 plugins.xml
