@@ -2,10 +2,9 @@
 
 from qgis.core import QgsProcessingAlgorithm
 
-__copyright__ = 'Copyright 2020, 3Liz'
-__license__ = 'GPL version 3'
-__email__ = 'info@3liz.org'
-__revision__ = '$Format:%H$'
+__copyright__ = "Copyright 2021, 3Liz"
+__license__ = "GPL version 3"
+__email__ = "info@3liz.org"
 
 
 class AsaPerimetreAlgorithm(QgsProcessingAlgorithm):

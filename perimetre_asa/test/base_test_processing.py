@@ -10,9 +10,9 @@ from processing.core.Processing import Processing
 
 from ..processing.provider import AsaPerimetreProvider as Provider
 
-__copyright__ = 'Copyright 2020, 3Liz'
-__license__ = 'GPL version 3'
-__email__ = 'info@3liz.org'
+__copyright__ = "Copyright 2021, 3Liz"
+__license__ = "GPL version 3"
+__email__ = "info@3liz.org"
 
 
 class BaseTestProcessing(unittest.TestCase):
